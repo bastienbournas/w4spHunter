@@ -1,0 +1,34 @@
+# Researchers Uncover 29 Malicious PyPI Packages Targeted Developers with W4SP Stealer
+#
+# list from https://thehackernews.com/2022/11/researchers-uncover-29-malicious-pypi.html
+# date published: 2022-11-05 08:35:00+00:00
+#
+typesutil
+typestring
+sutiltype
+duonet
+fatnoob
+strinfer
+pydprotect
+incrivelsim
+twyne
+pyptext
+installpy
+faq
+colorwin
+requests-httpx
+colorsama
+shaasigma
+stringe
+felpesviadinho
+cypress
+pystyte
+pyslyte
+pystyle
+pyurllib
+algorithmic
+oiu
+iao
+curlapi
+type-color
+pyhints
