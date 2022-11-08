@@ -1,6 +1,6 @@
 import os, sys
-import pkg_resources
 import argparse
+from pkgutil import iter_modules
 
 #############################################################################################
 #                                                                                           #
@@ -12,19 +12,19 @@ import argparse
 #                                                                                           #
 #############################################################################################
 def searchInInstalledModules(maliciousModulesList):
-    print("Searching for malicious packages with W4SP Stealer locally installed... ")
+    print("Searching for malicious modules with W4SP Stealer locally installed... ")
 
     found = 0
     installedModules = []
-    for package in pkg_resources.working_set:
-        installedModules.append(package.project_name)
+    for module in iter_modules():
+        installedModules.append(module.name)
 
     for maliciousModule in maliciousModulesList:
         if maliciousModule in installedModules:
             print("/!\ Malicious module containing W4SP stealer found (locally installed): " + maliciousModule)
             found = found + 1
 
-    print(str(found) + " package(s) with W4SP Stealer found.")
+    print(str(found) + " module(s) with W4SP Stealer found.")
 
 #############################################################################################
 #                                                                                           #
@@ -51,17 +51,17 @@ if __name__ == "__main__":
     displayBanner()
 
     # Agrs processing
-    text = 'W4SP Hunter is a simple script which searches for usage of malicious python packages including the W4SP stealer malware. \
+    text = 'W4SP Hunter is a simple script which searches for usage of malicious python modules including the W4SP stealer malware. \
     See https://thehackernews.com/2022/11/researchers-uncover-29-malicious-pypi.html and https://github.com/loTus04/W4SP-Stealer'
     parser = argparse.ArgumentParser(description=text)
-    parser.add_argument("-f", "--file", help="Specify the path of the file listing the malicious packages.\
-        Default is current folder", default="malicious_packages.txt")
+    parser.add_argument("-f", "--file", help="Specify the path of the file listing the malicious modules.\
+        Default is current folder", default="malicious_modules.txt")
     args = parser.parse_args()
 
-    # Open the list of known malicious packages, and search for them in installed ones.
-    maliciousPackagesFilePath = args.file
-    with open(maliciousPackagesFilePath) as maliciousPackagesFile:
-        lines = maliciousPackagesFile.readlines()
+    # Open the list of known malicious modules, and search for them in installed ones.
+    maliciousModulesFilePath = args.file
+    with open(maliciousModulesFilePath) as maliciousModulesFile:
+        lines = maliciousModulesFile.readlines()
         maliciousModulesList = [x for x in lines if not x.startswith("#")] # remove comments in the file
         searchInInstalledModules(maliciousModulesList)
 
